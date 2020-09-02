@@ -1,30 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "cli.h"
 #include "mvn.h"
 #include "strutils.h"
 
-void cliInit () {
+	void cliInit () {
 
-	usrCommands = dictCreate();
-	dictInsert (usrCommands, "HELP", 0);
-	dictInsert (usrCommands, "TR", 1);
-	dictInsert (usrCommands, "MM", 2);
-	dictInsert (usrCommands, "MD", 3);
-	dictInsert (usrCommands, "QUIT", 4);
-	dictInsert (usrCommands, "LOAD", 5);
-	dictInsert (usrCommands, "ASM", 6);
-	dictInsert (usrCommands, "BUILD", 7);
-	dictInsert (usrCommands, "RESET", 8);
-	dictInsert (usrCommands, "SET", 9);
-	dictInsert (usrCommands, "PRINT", 10);
-	dictInsert (usrCommands, "STEP", 11);
-	dictInsert (usrCommands, "CAT", 12);
-	dictInsert (usrCommands, "BP", 13);
-	dictInsert (usrCommands, "RUN", 14);
+		usrCommands = dictCreate();
+		dictInsert (usrCommands, "HELP", 0);
+		dictInsert (usrCommands, "TR", 1);
+		dictInsert (usrCommands, "MM", 2);
+		dictInsert (usrCommands, "MD", 3);
+		dictInsert (usrCommands, "QUIT", 4);
+		dictInsert (usrCommands, "LOAD", 5);
+		dictInsert (usrCommands, "ASM", 6);
+		dictInsert (usrCommands, "BUILD", 7);
+		dictInsert (usrCommands, "RESET", 8);
+		dictInsert (usrCommands, "SET", 9);
+		dictInsert (usrCommands, "PRINT", 10);
+		dictInsert (usrCommands, "STEP", 11);
+		dictInsert (usrCommands, "CAT", 12);
+		dictInsert (usrCommands, "BP", 13);
+		dictInsert (usrCommands, "RUN", 14);
 
-}
+	}
 
 void cliLoop () {
 	
@@ -42,20 +43,31 @@ void cliLoop () {
 		line[len - 1] = 0;
 		strToUpper(line);
 
-		dictEl* elem = dictLookup (usrCommands, line);
-		if (elem != NULL) {
-			
-			int com = elem->value;
-			switch (com) {
+		strTokens* tokens = strSplit(line, " \t\n");
+		if (tokens->number) {
+
+			dictEl* elem = dictLookup (usrCommands, line);
+			if (elem != NULL) {
 				
-				case 4: shouldQuit = 1; break;
-				case 10: cliPrintReg(); break;
+				int com = elem->value;
+				switch (com) {
+					
+					case 4: shouldQuit = 1; break;
+					case 10: cliPrintReg(); break;
+			
+				}
+
+			} else {
+
+				printf("Unrecognized command\n");
 			
 			}
-		} else {
-			printf("Unrecognized command\n");
 		}
+
+		free(tokens->strings);
+		free(tokens);
 	}
+
 }
 
 void cliPrintReg () {

@@ -12,6 +12,8 @@ strTokens* strSplit (char* source, char* delimiters);
 
 int strFindFirstOf (char* source, char* targets, int start);
 int strFindLastOf (char* source, char* targets, int start);
+int strFindFirstNotOf (char* source, char* targets, int start);
+int strFindLastNotOf (char* source, char* targets, int start);
 int strCountChar (char* source, char ch);
 char* strSubstr (char* source, int start, int end);
 
