@@ -9,6 +9,7 @@ typedef struct {
 } strTokens;
 
 strTokens* strSplit (char* source, char* delimiters);
+void strFreeTokens (strTokens* T);
 
 int strFindFirstOf (char* source, char* targets, int start);
 int strFindLastOf (char* source, char* targets, int start);

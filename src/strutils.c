@@ -22,6 +22,13 @@ strTokens* strSplit (char* source, char* delimiters) {
 		if (source[sourceLength - 1] == delimiters[i]) count--;
 	} 
 
+	if (count == 0) {
+		tokens->strings = (char**)malloc(sizeof(char*));
+		tokens->strings[0] = strDup (source);
+		tokens->number = 1;
+		return tokens;
+	}
+
 	// Ignore double delimiter occurrence
 	char lastCh = source[0];
 	for (i = 1; i < sourceLength; ++i) {
@@ -50,15 +57,26 @@ strTokens* strSplit (char* source, char* delimiters) {
 		
 		lastPos = strFindFirstNotOf (source, delimiters, pos);
 		pos = strFindFirstOf (source, delimiters, lastPos);
+		if (pos == -1) pos = sourceLength;
 
 		strArray[i] = strSubstr (source, lastPos, pos);
-		if (i < count) pos++;
-
+		pos++;
 	}
 
 	tokens->strings = strArray;
 	tokens->number = count + 1;
 	return tokens;
+}
+
+void strFreeTokens (strTokens* T) {
+	
+	if (T) {
+		int i;
+		int count = T->number;
+		for (i = 0; i < count; ++i) free(T->strings[i]);
+		free(T->strings);
+		free(T);
+	}	
 }
 
 int strFindFirstOf (char* source, char* targets, int start) {
@@ -166,7 +184,7 @@ char* strSubstr (char* source, int start, int end) {
 	if (start > length - 1 || start >= end || start < 0 || end < 0) return NULL;
 	else {
 
-		if (end > length - 1) end = length - 1;
+		if (end > length) end = length;
 		
 		int charCount = end - start;
 		char* newStr = (char*)malloc(sizeof(char) * (charCount + 1));

@@ -13,7 +13,25 @@ dict* dictCreate () {
 	return D;
 }
 
+void dictFree (dict* D) {
+
+	if (D) {
+		int i;
+		for (i = 0; i < HASH_SIZE; ++i) dictFreeEl (D->table[i]);		
+	}
+}
+
+void dictFreeEl (dictEl* element) {
+
+	if (element) {
+		if (element->next) dictFreeEl (element->next);
+		free(element->key);
+		free(element);
+	}
+}
+
 unsigned dictHash (const char* str) {
+	
 	unsigned hashVal;
 	for (hashVal = 0; *str != 0; ++str)
 		hashVal = *str + HASH_SRC * hashVal;

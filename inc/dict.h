@@ -15,6 +15,9 @@ typedef struct {
 } dict;
 
 dict* dictCreate ();
+void dictFree (dict* D);
+void dictFreeEl (dictEl* element);
+
 unsigned dictHash (const char* str);
 dictEl* dictLookup (dict* D, const char* key);
 dictEl* dictInsert (dict* D, const char* key, int value);

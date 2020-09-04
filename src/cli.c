@@ -6,26 +6,26 @@
 #include "mvn.h"
 #include "strutils.h"
 
-	void cliInit () {
+void cliInit () {
 
-		usrCommands = dictCreate();
-		dictInsert (usrCommands, "HELP", 0);
-		dictInsert (usrCommands, "TR", 1);
-		dictInsert (usrCommands, "MM", 2);
-		dictInsert (usrCommands, "MD", 3);
-		dictInsert (usrCommands, "QUIT", 4);
-		dictInsert (usrCommands, "LOAD", 5);
-		dictInsert (usrCommands, "ASM", 6);
-		dictInsert (usrCommands, "BUILD", 7);
-		dictInsert (usrCommands, "RESET", 8);
-		dictInsert (usrCommands, "SET", 9);
-		dictInsert (usrCommands, "PRINT", 10);
-		dictInsert (usrCommands, "STEP", 11);
-		dictInsert (usrCommands, "CAT", 12);
-		dictInsert (usrCommands, "BP", 13);
-		dictInsert (usrCommands, "RUN", 14);
+	cliCommands = dictCreate();
+	dictInsert (cliCommands, "HELP", 0);
+	dictInsert (cliCommands, "TR", 1);
+	dictInsert (cliCommands, "MM", 2);
+	dictInsert (cliCommands, "MD", 3);
+	dictInsert (cliCommands, "QUIT", 4);
+	dictInsert (cliCommands, "LOAD", 5);
+	dictInsert (cliCommands, "ASM", 6);
+	dictInsert (cliCommands, "BUILD", 7);
+	dictInsert (cliCommands, "RESET", 8);
+	dictInsert (cliCommands, "SET", 9);
+	dictInsert (cliCommands, "PRINT", 10);
+	dictInsert (cliCommands, "STEP", 11);
+	dictInsert (cliCommands, "CAT", 12);
+	dictInsert (cliCommands, "BP", 13);
+	dictInsert (cliCommands, "RUN", 14);
 
-	}
+}
 
 void cliLoop () {
 	
@@ -46,7 +46,7 @@ void cliLoop () {
 		strTokens* tokens = strSplit(line, " \t\n");
 		if (tokens->number) {
 
-			dictEl* elem = dictLookup (usrCommands, line);
+			dictEl* elem = dictLookup (cliCommands, line);
 			if (elem != NULL) {
 				
 				int com = elem->value;
@@ -69,6 +69,23 @@ void cliLoop () {
 	}
 
 }
+
+void cliHelp () {
+
+}
+
+void cliTrace () {
+
+}
+
+void cliMemModify () {
+
+}
+
+void cliMemDisplay () {
+
+}
+
 
 void cliPrintReg () {
 
