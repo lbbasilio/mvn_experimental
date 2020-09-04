@@ -17,6 +17,8 @@ static dict* asmMnemonics;
 void asmInit();
 void asmAssemble(strTokens* files);
 
+int asmNumArgumentValidity (char* arg, int* value, int hexSize);
+
 #define LINE_ERROR 0
 #define LINE_OK 1
 #define LINE_SKIP 2

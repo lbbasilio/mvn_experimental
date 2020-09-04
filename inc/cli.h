@@ -13,4 +13,3 @@ void cliTrace ();
 void cliMemModify ();
 void cliMemDisplay ();
 
-int assertArgumentValidity (char* arg, int* value);

@@ -10,8 +10,11 @@ static struct {
 	unsigned char ram[MEM_SIZE];
 	unsigned char acc;
 	unsigned short pc;
+
+	int halt;
 	
-	FILE* stream;
+	FILE* inStream;
+	FILE* outStream;
 
 } mvn;
 

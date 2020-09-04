@@ -15,13 +15,14 @@ int main () {
 	int i;
 	for (i = 0; i < tok->number; ++i) printf("%s\n", tok->strings[i]); 
 	cliInit();
-	cliLoop();*/
+	cliLoop();
 	int result = 0;
 	asmLineType* teste1 = asmParseLine("ola\n", &result);
 	asmLineType* teste2 = asmParseLine("eu nao aguento;ah prompou\n", &result);
 	asmLineType* teste3 = asmParseLine(" ;ola\n", &result);
-	asmLineType* teste4 = asmParseLine("\n", &result);
+	asmLineType* teste4 = asmParseLine("\n", &result);*/
 
+	asmInit();
 	asmAssemble(NULL);
 	return 0;
 }

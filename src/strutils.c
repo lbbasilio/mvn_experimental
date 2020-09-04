@@ -20,9 +20,10 @@ strTokens* strSplit (char* source, char* delimiters) {
 	for (i = 0; i < delimLength; ++i) {
 		count += strCountChar(source, delimiters[i]);
 		if (source[sourceLength - 1] == delimiters[i]) count--;
+		if (source[0] == delimiters[i]) count--;
 	} 
 
-	if (count == 0) {
+	if (strFindFirstOf (source, delimiters, 0) == -1) {
 		tokens->strings = (char**)malloc(sizeof(char*));
 		tokens->strings[0] = strDup (source);
 		tokens->number = 1;

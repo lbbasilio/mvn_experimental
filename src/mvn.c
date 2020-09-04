@@ -43,12 +43,14 @@ void mvnExecOp () {
 				  mvn.pc = operand + 2;
 				  break;
 
-		case 0xB: break;
-		case 0xC: mvn.pc = operand; break;
+		case 0xB: mvn.pc = operand; break;
+
+		// Machine Halt
+		case 0xC: mvn.halt = 1; break;
 
 		// IO
-		case 0xD: mvn.acc = fgetc(mvn.stream); break;
-		case 0xE: fputc (mvn.acc, mvn.stream); break;
+		case 0xD: mvn.acc = fgetc(mvn.inStream); break;
+		case 0xE: fputc(mvn.acc, mvn.outStream); break;
 
 		// OS
 		case 0xF: break; 
